@@ -94,8 +94,8 @@ void borrarPrimero(Lista *lista) {
     	nuevo_head=temp->next;
     	free(lista->head);
     	lista->head = nuevo_head;
+		lista->tamano--;
 	}
-	lista->tamano--;
 }
 
 void borrarUltimo(Lista *lista) {
@@ -110,7 +110,7 @@ void borrarUltimo(Lista *lista) {
 		}
 		free(tmp->next);
 		tmp->next=lista->head;
-	lista->tamano--;
+		lista->tamano--;
 	}
 }
 

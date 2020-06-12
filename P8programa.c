@@ -7,7 +7,7 @@ void main(){
  	
 	int opcion,elemento = 0;
 	Lista miLista =crearLista();
-	addFinalLista(&miLista,10);
+	addPrincipioLista(&miLista,10);
 	addFinalLista(&miLista,20);
 //	addIesimoLista(&miLista,5,1);
 	addFinalLista(&miLista,30);
@@ -21,3 +21,6 @@ void main(){
 	print_list(miLista);
 
 }
+
+
+

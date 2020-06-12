@@ -34,13 +34,11 @@ void print_list(Lista lista) {
     	printf("Los elementos de la lista son: \n");
     	Nodo *current = lista.head;
    		while (current != NULL){
-		   printf("%d\n",current->next->val) ;
+		   printf("%d\n",current->val) ;
 		   current = current->next; 
 		}	
 	}
 }
-
-
 void print_list2(Lista lista) {
     if(lista.head==NULL){
     	printf("LA LISTA ESTA VACIA \n");
@@ -60,7 +58,6 @@ void print_list2(Lista lista) {
    	 	}
 	}
 }
-
 void addFinalLista(Lista *lista, int val) {
 	if(lista->head==NULL){
 		primerNodo(lista,val);
@@ -93,7 +90,6 @@ void addPrincipioLista(Lista *lista, int val) {
     	lista->head = new_node;
 	}
 }
-
 void primerNodo(Lista *lista, int val){
 	Nodo *nodo = (Nodo*)malloc(sizeof(Nodo));
 	nodo->val = val;
@@ -101,18 +97,32 @@ void primerNodo(Lista *lista, int val){
     nodo->prev = NULL;
     lista->head = nodo;
 }
-
 void addIesimoLista(Lista *lista, int val,int posicion){
 	
 	int contador;
 	Nodo *temp;   
     temp=lista->head;
-		
+
+	int i=0;
+	while(1){
+		if (temp==NULL && i<=posicion){
+			printf("error. Ingrese otra posicion");
+			scanf("%d",&posicion);
+			temp=lista->head;
+		}
+		else{
+			temp=lista->head;
+			break;
+		}
+		temp=temp->next;
+		i++;
+	} 
 	for(contador=1;contador<posicion-1;contador++)   {
 	      temp=temp->next;
 	      if(temp==NULL)
 	      	printf("Aqui hay un error");
 	}
+
 	Nodo *nuevoNodo;
 	nuevoNodo = (Nodo*)malloc(sizeof(Nodo));
    	nuevoNodo->val = val;
@@ -121,7 +131,6 @@ void addIesimoLista(Lista *lista, int val,int posicion){
    	temp->next->prev = nuevoNodo;
 	temp->next = nuevoNodo;
 }
-
 void borrarPrimero(Lista *lista) {
     if (lista->head == NULL) {
         printf("La lista esta vacia");
@@ -140,7 +149,6 @@ void borrarPrimero(Lista *lista) {
 		
 	}
 }
-
 void borrarUltimo(Lista *lista) {
     Nodo *temp = lista->head;
 	if (lista->head == NULL) {

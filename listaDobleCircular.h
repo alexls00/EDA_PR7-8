@@ -20,7 +20,7 @@ void addFinalLista(Lista*,int);
 void primerNodo(Lista*,int);
 void borrarPrimero(Lista*);
 void borrarUltimo(Lista*);
-void recorrerLista(Lista);
+void recorrerLista(Lista*);
 
 Lista crearLista(){
 	Lista lista;
@@ -28,20 +28,6 @@ Lista crearLista(){
 	lista.tamano=0;
 	return lista;
 }
-
-void recorrerLista(Lista lista){
-	int var = 0;
-	Nodo *temp = lista.head;
-	do{
-		printf("El elemento actual es %d \n",temp->val);
-		printf("Mostrar Siguiente Presione 1 \n");
-		printf("Salir Presione 2 \n");
-		scanf("%d",&var);
-		temp=temp->next;
-		
-	}while (var!=2);
-}
-
 
 void print_list(Lista lista) {
     int tamano = lista.tamano;
@@ -58,7 +44,6 @@ void print_list(Lista lista) {
 		}	
 	}
 }
-
 
 void addFinalLista(Lista *lista, int val) {
 	if(lista->head==NULL){
@@ -80,6 +65,7 @@ void addFinalLista(Lista *lista, int val) {
 	}	
 	lista->tamano++;
 }
+
 void addPrincipioLista(Lista *lista, int val) {
 	if(lista->head==NULL){
 		primerNodo(lista,val);
@@ -116,7 +102,12 @@ void borrarPrimero(Lista *lista) {
         printf("La lista esta vacia");
     }
     else{
-    	
+    	Nodo *nuevo_head = NULL;
+		Nodo *tmp=lista->head;
+		nuevo_head=tmp->next;
+		free(lista->head);
+		lista->head = nuevo_head;
+		lista->tamano--;
 	}
 }
 
@@ -125,12 +116,54 @@ void borrarUltimo(Lista *lista) {
         printf("La lista esta vacia");
     }
     else{
-    	
+    	Nodo *tmp=lista->head;
+		while(tmp->next->next != lista->head){
+			tmp=tmp->next;
+		}
+		free(tmp->next);
+		tmp->next=lista->head;
+		lista->head->prev = tmp;
+		lista->tamano--;
 	}
 
 }
 
-
+void recorrerLista(Lista* lista){
+	system("cls");
+	int i = 1;
+	Nodo *tmp;
+	tmp = lista->head;
+	char bot;
+	while (1){
+		printf("s+Enter para ver siguiente elemento\n");
+		printf("a+Enter para ver elemento anterior\n");
+		printf("q+Enter para regresar al menu\n");
+		printf("Elemento %d: %d\n",i,tmp->val);
+		getchar();
+		scanf("%c",&bot);
+		if (bot=='s'){
+			system("cls");
+			tmp=tmp->next;
+			i++;
+			if (tmp==lista->head){i=1;}
+		}
+		else if(bot=='a'){
+			system("cls");
+			tmp=tmp->prev;
+			i--;
+			if (tmp->next==lista->head){i=lista->tamano;}
+		}
+		else if (bot=='q'){
+			system("cls");
+			return;
+		}
+		else{
+			system("cls");
+			printf("error. Intente de nuevo\n");
+		}
+		
+	} 
+}
 
 
 
